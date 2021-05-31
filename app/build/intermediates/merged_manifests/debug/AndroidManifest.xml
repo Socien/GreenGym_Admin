@@ -18,6 +18,8 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.Greengym_Admin" >
+        <activity android:name="com.example.greengym_admin.Equip_detail" />
+        <activity android:name="com.example.greengym_admin.equip_item" />
         <activity android:name="com.example.greengym_admin.dialog" />
         <activity android:name="com.example.greengym_admin.item" />
         <activity android:name="com.example.greengym_admin.ReportActivity" />

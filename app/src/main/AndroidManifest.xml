@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/admin_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Greengym_Admin">
-        <activity android:name=".dialog"></activity>
+        <activity android:name=".Equip_detail"></activity>
+        <activity android:name=".equip_item" />
+        <activity android:name=".dialog" />
         <activity android:name=".item" />
         <activity android:name=".ReportActivity" />
         <activity android:name=".EquipActivity" />

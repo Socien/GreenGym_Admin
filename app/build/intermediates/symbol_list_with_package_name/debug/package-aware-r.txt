@@ -57,6 +57,7 @@ animator mtrl_fab_hide_motion_spec
 animator mtrl_fab_show_motion_spec
 animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
+array equip_add_listArray
 attr actionBarDivider
 attr actionBarItemBackground
 attr actionBarPopupTheme
@@ -1857,6 +1858,13 @@ id endToStart
 id enterAlways
 id enterAlwaysCollapsed
 id equip
+id equipDetail_list
+id equip_add
+id equip_cancel
+id equip_delete
+id equip_detail
+id equip_list
+id equip_spinner
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
@@ -1997,6 +2005,7 @@ id progress_circular
 id progress_horizontal
 id radio
 id ratio
+id real_add
 id rectangles
 id report
 id report_list
@@ -2191,6 +2200,8 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_dialog
 layout activity_equip
+layout activity_equip_detail
+layout activity_equip_item
 layout activity_intro
 layout activity_main
 layout activity_report
@@ -2210,6 +2221,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout equip_spinner
 layout item
 layout material_chip_input_combo
 layout material_clock_display

@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
@@ -53,7 +52,7 @@ public class ReportActivity extends AppCompatActivity {
 
         //리스트뷰-어댑터 연결
         ListAdapter = new ListAdapter(ReportActivity.this, item);
-        report_list.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        report_list.setChoiceMode(report_list.CHOICE_MODE_SINGLE);
         report_list.setAdapter(ListAdapter);
 
         //자세히 버튼
@@ -94,7 +93,7 @@ public class ReportActivity extends AppCompatActivity {
                 });
 
                 //dialog 신고 버튼
-                report.setOnClickListener(new View.OnClickListener() { //******************* 구청 url 넣어주세요.
+                report.setOnClickListener(new View.OnClickListener() { //********************************** 구청 url 넣어주세요.
                     @Override
                     public void onClick(View v) {
 
@@ -109,7 +108,7 @@ public class ReportActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 AlertDialog.Builder list_dialog = new AlertDialog.Builder(ReportActivity.this);
-                list_dialog.setTitle("삭제");
+                list_dialog.setTitle("신고 삭제");
                 list_dialog.setMessage("정말로 삭제하시겠습니까?");
 
                 list_dialog.setPositiveButton("예", new DialogInterface.OnClickListener() {

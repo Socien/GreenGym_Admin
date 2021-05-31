@@ -10,6 +10,10 @@ public class item {
     private String park;
     private String date;
 
+    public item(String park) {
+        this.park = park;
+    }
+
     public String getDate(){
         return date;
     }
