@@ -1,9 +1,12 @@
 package com.example.greengym_admin;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
 
         equip = (Button) findViewById(R.id.equip);
         report = (Button) findViewById(R.id.report);
+
+        //인터넷 체크
+        checkInternetState();
 
         //운동 기구 관리
         equip.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +62,22 @@ public class MainActivity extends AppCompatActivity {
         if(System.currentTimeMillis() <= backTime + 2000){
             finish();
             return;
+
+        }
+    }
+    private void checkInternetState(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        assert connectivityManager != null;
+        if(!(connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected())){
+            new AlertDialog.Builder(this)
+                    .setMessage("인터넷이 연결되어 있지 않습니다.")
+                    .setCancelable(false)
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finishAffinity();
+                        }
+                    }).show();
         }
     }
 }

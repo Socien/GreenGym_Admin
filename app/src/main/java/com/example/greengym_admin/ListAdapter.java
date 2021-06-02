@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class ListAdapter extends BaseAdapter {
@@ -26,7 +29,7 @@ public class ListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public item getItem(int position) {
         return item.get(position);
     }
 
@@ -45,8 +48,8 @@ public class ListAdapter extends BaseAdapter {
         date = (TextView) convertView.findViewById(R.id.date_list);
         park = (TextView) convertView.findViewById(R.id.park_list);
 
-        date.setText(item.get(position).getDate().toString());
-        park.setText(item.get(position).getPark());
+        date.setText(item.get(position).getR_date());
+        park.setText(item.get(position).getP_name());
 
         return convertView;
     }

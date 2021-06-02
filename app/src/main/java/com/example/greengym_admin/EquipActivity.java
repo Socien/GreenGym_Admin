@@ -8,6 +8,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -16,7 +27,7 @@ public class EquipActivity extends AppCompatActivity {
     //listView 관련
     private ListView equip_list;
     private Equip_ListAdapter Equip_ListAdapter;
-    private ArrayList equip_item;
+    private ArrayList<park_item> equip_item;
     private Button equip_detail;
 
     @Override
@@ -31,42 +42,72 @@ public class EquipActivity extends AppCompatActivity {
         equip_list = (ListView) findViewById(R.id.equip_list);
         equip_detail = (Button) findViewById(R.id.equip_detail);
 
-        //아이템 추가 - 일부만 넣음 **************************** (서버 연결해서 넣을 수 있으면 넣어주세요.)
-        equip_item = new ArrayList();
-        equip_item.add(new item("가중나무어린이공원"));
-        equip_item.add(new item("개나리어린이공원"));
-        equip_item.add(new item("광나루로수변계류"));
-        equip_item.add(new item("광남그린웨이 자투리땅"));
-        equip_item.add(new item("광진숲나루"));
-        equip_item.add(new item("구둘어린이공원"));
-        equip_item.add(new item("구의2동마을마당"));
-        equip_item.add(new item("구의2동제2마을마당"));
-        equip_item.add(new item("구의어린이공원"));
-        equip_item.add(new item("구의유수지"));
-        equip_item.add(new item("군자동마을마당"));
-        equip_item.add(new item("군자어린이공원"));
-        equip_item.add(new item("금모래어린이공원"));
-        equip_item.add(new item("긴고랑어린이공원"));
-        equip_item.add(new item("남일어린이공원"));
-        equip_item.add(new item("노유산어린이공원"));
-        equip_item.add(new item("능동소공원"));
-        equip_item.add(new item("대동마을공원"));
-        equip_item.add(new item("동자어린이공원"));
-        equip_item.add(new item("명성어린이공원"));
-        equip_item.add(new item("목련어린이공원"));
-
-        //리스트뷰-어댑터 연결
-        Equip_ListAdapter = new Equip_ListAdapter(EquipActivity.this, equip_item);
-        equip_list.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        equip_list.setAdapter(Equip_ListAdapter);
+        sendRequest();
 
         //자세히 버튼
         equip_detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Equip_detail.class);
-                startActivity(intent);
+                int count = equip_list.getCheckedItemCount();
+                if(count>0){
+                    int c = equip_list.getCheckedItemPosition();
+                    String id = equip_item.get(c).getPark_id();
+                    intent.putExtra("selectid", id);
+                    startActivity(intent);
+
+                }else{
+                    Toast.makeText(EquipActivity.this, "공원을 선택하세요.", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
+    }
+    public void sendRequest(){
+
+        String url = "http://15.164.250.186:8000/api/v1/manager_equip/parklist";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response){
+
+                equip_item = new ArrayList<>();
+                try {
+                    JSONObject name = response.getJSONObject("response");
+                    JSONArray equip = name.getJSONArray("List");
+
+                    for(int i = 0; i <equip.length(); i++){
+                        JSONObject chk = equip.getJSONObject(i);
+                        String p_name = chk.getString("p_name");
+                        String p_id = chk.getString("p_id");
+                        equip_item.add(new park_item(p_name, p_id));
+                    }
+                    //리스트뷰-어댑터 연결
+                    Equip_ListAdapter = new Equip_ListAdapter(EquipActivity.this, equip_item);
+                    equip_list.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+                    equip_list.setAdapter(Equip_ListAdapter);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error){
+                String e = error.getMessage();
+                Toast.makeText(EquipActivity.this, e, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        jsonObjectRequest.setShouldCache(false); //이전 결과 있어도 새로 요청하여 응답을 보여준다.
+        AppHelper.requestQueue = Volley.newRequestQueue(this); // requestQueue 초기화 필수
+        AppHelper.requestQueue.add(jsonObjectRequest);
+
     }
 }

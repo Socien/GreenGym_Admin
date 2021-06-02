@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.greengym_admin">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -10,9 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Greengym_Admin">
         <activity android:name=".Equip_detail"></activity>
-        <activity android:name=".equip_item" />
-        <activity android:name=".dialog" />
-        <activity android:name=".item" />
+        <activity android:name=".item"
+            tools:ignore="Instantiatable"/>
         <activity android:name=".ReportActivity" />
         <activity android:name=".EquipActivity" />
         <activity android:name=".IntroActivity" />
@@ -24,5 +27,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

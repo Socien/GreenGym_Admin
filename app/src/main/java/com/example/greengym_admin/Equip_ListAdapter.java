@@ -12,10 +12,10 @@ import java.util.ArrayList;
 public class Equip_ListAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<item> item;
+    private ArrayList<park_item> item;
     private TextView park;
 
-    public Equip_ListAdapter(Context context, ArrayList<item> item) {
+    public Equip_ListAdapter(Context context, ArrayList<park_item> item) {
         this.context = context;
         this.item = item;
     }
@@ -43,7 +43,7 @@ public class Equip_ListAdapter extends BaseAdapter {
 
         }
         park = (TextView) convertView.findViewById(R.id.park_list);
-        park.setText(item.get(position).getPark());
+        park.setText(item.get(position).getPark_name());
 
         return convertView;
     }
