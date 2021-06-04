@@ -6,11 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -64,21 +62,13 @@ public class ReportActivity extends AppCompatActivity {
         detail = (Button) findViewById(R.id.detail);
         delete = (Button) findViewById(R.id.delete);
 
-        report_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
-
-
         //자세히 버튼
         detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 int count = report_list.getCheckedItemCount();;
-                if(count>0){
+                if(count > 0){
                     //dialog 생성
                     View dialogView = getLayoutInflater().inflate(R.layout.activity_dialog, null);
                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
@@ -118,14 +108,12 @@ public class ReportActivity extends AppCompatActivity {
                         public void onClick(View v) {
                             int c = report_list.getCheckedItemPosition();
                             String id = item.get(c).getR_id();
-
                             urlRequest(id);
-
                         }
                     });
 
 
-                }else{
+                }else {
                     Toast.makeText(ReportActivity.this, "공원을 선택하세요.", Toast.LENGTH_SHORT).show();
                 }
 

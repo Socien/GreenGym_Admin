@@ -6,9 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class ListAdapter extends BaseAdapter {
@@ -41,10 +38,9 @@ public class ListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        if (convertView == null) {
+        if (convertView == null)
             convertView = LayoutInflater.from(context).inflate(R.layout.item, null);
 
-        }
         date = (TextView) convertView.findViewById(R.id.date_list);
         park = (TextView) convertView.findViewById(R.id.park_list);
 
